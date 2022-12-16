@@ -246,7 +246,7 @@ function App() {
           onChange={handleText}
           ref={textRef}
           name="eventz"
-          placeholder="date/time *add [format] after time
+          placeholder="date & time *add [format] after time
 event name
 venue"
           id=""
