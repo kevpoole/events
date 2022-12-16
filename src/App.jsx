@@ -194,7 +194,7 @@ function App() {
   };
 
   const removePastDates = () => {
-    const newList = list.filter((item) => item.fullDate >= date)
+    const newList = list.filter((item) => new Date(item.fullDate) >= new Date(date))
     setList(newList)
   };
 
