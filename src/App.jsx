@@ -246,7 +246,9 @@ function App() {
           onChange={handleText}
           ref={textRef}
           name="eventz"
-          placeholder="paste into meeee"
+          placeholder="date/time *add [format] after time
+event name
+venue"
           id=""
           cols="80"
           rows="3"
@@ -283,7 +285,7 @@ function App() {
             <input ref={titleRef} name="title" className="input" type="text" />
           </div>
           <div className="inputContainer">
-            <label htmlFor="time">time</label>
+            <label htmlFor="time">time / format</label>
             <input ref={timeRef} name="time" className="input" type="text" />
           </div>
         </div>
