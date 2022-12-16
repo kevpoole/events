@@ -13,10 +13,10 @@ function App() {
   });
   const [list, setList] = useLocalStorage("events", []);
   const [dateHeading, setDateHeading] = useLocalStorage("headings", []);
+  const [showForm, setShowForm] = useState(false)
 
   const textRef = useRef();
 
-  
   const date = new Date();
   date.setHours(0, 0, 0, 0);
   const tomorrow = new Date(date.getTime());
@@ -31,7 +31,6 @@ function App() {
   fifthDayFromNow.setDate(fifthDayFromNow.getDate() + 5);
   const sixthDayFromNow = new Date(date.getTime());
   sixthDayFromNow.setDate(sixthDayFromNow.getDate() + 6);
-  
 
   const days = [
     "SUNDAY",
@@ -152,6 +151,74 @@ function App() {
     });
   }
 
+  function handleSubmit(e) {
+    e.preventDefault();
+    setList((prev) => [...prev, text]);
+    setText({
+      date: "",
+      venue: "",
+      title: "",
+      time: "",
+      id: "",
+    });
+    textRef.current.value = "";
+  }
+
+  const dateRef = useRef();
+  const titleRef = useRef();
+  const venueRef = useRef();
+  const timeRef = useRef();
+
+  function handleManualText(e) {
+    const dateName = new Date(dateRef.current.value);
+    dateName.setHours(0, 0, 0, 0);
+    dateName.setDate(dateName.getDate() + 1);
+    // console.log(dateName)
+    setText({
+      fullDate: dateName,
+      date: dateRef.current.value,
+      title: titleRef.current.value,
+      venue: venueRef.current.value,
+      time: timeRef.current.value,
+      realDate: dateName.toString().split(" 00")[0],
+      id: uuidv4(),
+    });
+  }
+
+  function handleManualSubmit(e) {
+    e.preventDefault();
+    setList((prev) => [...prev, text]);
+    setText({
+      fullDate: "",
+      realDate: "",
+      date: "",
+      venue: "",
+      title: "",
+      time: "",
+      id: "",
+    });
+    dateRef.current.value = "";
+    venueRef.current.value = "";
+    titleRef.current.value = "";
+    venueRef.current.value = "";
+    timeRef.current.value = "";
+  }
+
+  const removeItem = (id) => {
+    setList((prev) => {
+      if (prev.find((item) => item.id === id))
+        return prev.filter((item) => item.id !== id);
+      else return;
+    });
+  };
+
+  const removePastDates = () => {
+    const newList = list.filter(
+      (item) => new Date(item.fullDate) >= new Date(date)
+    );
+    setList(newList);
+  };
+
   // sort alphabetically by venue
   function compare(a, b) {
     const venueA = a.venue?.toUpperCase();
@@ -172,36 +239,9 @@ function App() {
     setDateHeading(Array.from(new Set(list.map((item) => item.realDate))));
   }, [list]);
 
-  function handleSubmit(e) {
-    e.preventDefault();
-    setList((prev) => [...prev, text]);
-    setText({
-      date: "",
-      venue: "",
-      title: "",
-      time: "",
-      id: "",
-    });
-    textRef.current.value = "";
-  }
-
-  const removeItem = (id) => {
-    setList((prev) => {
-      if (prev.find((item) => item.id === id))
-        return prev.filter((item) => item.id !== id);
-      else return;
-    });
-  };
-
-  const removePastDates = () => {
-    const newList = list.filter((item) => new Date(item.fullDate) >= new Date(date))
-    setList(newList)
-  };
-
-
   return (
     <div>
-      <form action="" onSubmit={handleSubmit}>
+      <form className="fbForm" action="" onSubmit={handleSubmit}>
         <textarea
           onChange={handleText}
           ref={textRef}
@@ -215,7 +255,46 @@ function App() {
           boom
         </button>
       </form>
-      <button className="submit" onClick={() => removePastDates()}>remove past dates</button>
+      <button className="submit" onClick={() => setShowForm(!showForm)} >manual entry</button>
+      {showForm && <form
+        onSubmit={handleManualSubmit}
+        onChange={handleManualText}
+        className="manualForm"
+        action=""
+      >
+        <div className="formContainer">
+        <div className="inputContainer">
+        <label htmlFor="date">date</label>
+          <input
+            ref={dateRef}
+            className="input"
+            name="date"
+            type="date"
+            ng-model-options="{timezone: 'utc'}"
+          />
+                    </div>
+
+          <div className="inputContainer">
+            <label htmlFor="venue">venue</label>
+            <input ref={venueRef} name="venue" className="input" type="text" />
+          </div>
+          <div className="inputContainer">
+            <label htmlFor="title">event title</label>
+            <input ref={titleRef} name="title" className="input" type="text" />
+          </div>
+          <div className="inputContainer">
+            <label htmlFor="time">time</label>
+            <input ref={timeRef} name="time" className="input" type="text" />
+          </div>
+        </div>
+
+        <button type="submit" className="submit">
+          boom
+        </button>
+      </form>}
+      <button className="submit" onClick={() => removePastDates()}>
+        remove past dates
+      </button>
 
       {sorted.map((events) => (
         <EventContainer
