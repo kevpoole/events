@@ -1,3 +1,8 @@
+*{
+  margin: 0;padding: 0;box-sizing: border-box;
+}
+
+
 :root {
   font-family: Inter, Avenir, Helvetica, Arial, sans-serif;
   font-size: 16px;
@@ -16,9 +21,9 @@
 }
 
 #root {
-  max-width: 1280px;
-  margin: 0 auto;
-  padding: 2rem;
+  /* max-width: 1280px; */
+  margin: 0;
+  padding: 0rem;
   text-align: center;
   overflow-x: hidden;
 }
@@ -36,7 +41,7 @@ body {
   margin: 0;
   display: flex;
   place-items: center;
-  min-width: 320px;
+  width: 100%;
   min-height: 100vh;
   flex-direction: column;
 }
@@ -62,7 +67,7 @@ textarea{
 .eventWrapper{
   display: flex;
   flex-direction: column;
-  width: 90%;
+  width: 100%;
   border: 1px solid black;
   padding: 1rem;
   margin-bottom: 3rem;
@@ -111,10 +116,20 @@ h4{
   justify-content: center;
   width: 100%;
 }
+
+.manualFormWrapper{
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  
+}
 .manualForm{
   display: flex;
   width: 100%;
-  padding: 2rem;
+  justify-content: flex-end;
+ 
+  /* padding: 2rem; */
 }
 
 .formContainer{
@@ -180,6 +195,8 @@ h4{
 
   .manualForm{
     flex-direction: column;
+    align-items: center;
+    justify-content: center;
   }
 
   .submit{

@@ -257,6 +257,8 @@ venue"
           boom
         </button>
       </form>
+      
+      <div className="manualFormWrapper">
       <button className="submit" onClick={() => setShowForm(!showForm)} >manual entry</button>
       {showForm && <form
         onSubmit={handleManualSubmit}
@@ -294,9 +296,12 @@ venue"
           boom
         </button>
       </form>}
+      </div>
+      
       <button className="submit" onClick={() => removePastDates()}>
         remove past dates
       </button>
+      
 
       {sorted.map((events) => (
         <EventContainer
