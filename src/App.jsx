@@ -1,5 +1,5 @@
 import { useState, useRef, useEffect } from "react";
-import "./App.css";
+import "./index.css";
 import EventContainer from "./EventContainer";
 import { v4 as uuidv4 } from "uuid";
 import { useLocalStorage } from "../hooks/useLocalStorage";
@@ -240,7 +240,7 @@ function App() {
   }, [list]);
 
   return (
-    <div>
+    <body>
       <form className="fbForm" action="" onSubmit={handleSubmit}>
         <textarea
           onChange={handleText}
@@ -306,7 +306,7 @@ venue"
           list={list.filter((item) => item.realDate === events)}
         />
       ))}
-    </div>
+    </body>
   );
 }
 
