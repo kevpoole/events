@@ -241,18 +241,24 @@ function App() {
 
   return (
     <body>
+      <div className="pic">
+      
+      </div>
+      
       <form className="fbForm" action="" onSubmit={handleSubmit}>
-        <textarea
+          <div className="inputContainer">
+          <label htmlFor="eventz">paste here</label>
+          <textarea
           onChange={handleText}
           ref={textRef}
           name="eventz"
-          placeholder="date & time *add [format] after time
-event name
-venue"
+          
           id=""
           cols="80"
           rows="3"
         ></textarea>
+          </div>
+        
         <button type="submit" className="submit">
           boom
         </button>
