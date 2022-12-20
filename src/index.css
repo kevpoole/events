@@ -52,7 +52,7 @@ body {
   justify-content: center;
   height: 20vh;
   width: 70%;
-  background-image: url('./event.png');
+  background-image: url('../src/assets/event.png');
   background-size: contain;
   background-repeat: no-repeat;
   background-position: center;
