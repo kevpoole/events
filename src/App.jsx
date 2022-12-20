@@ -252,7 +252,9 @@ function App() {
           onChange={handleText}
           ref={textRef}
           name="eventz"
-          
+          placeholder="DATE & TIME (add [Format] here)
+EVENT NAME
+VENUE"
           id=""
           cols="80"
           rows="3"
