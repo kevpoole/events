@@ -13,7 +13,7 @@ function App() {
   });
   const [list, setList] = useLocalStorage("events", []);
   const [dateHeading, setDateHeading] = useLocalStorage("headings", []);
-  const [showForm, setShowForm] = useState(false)
+  const [showForm, setShowForm] = useState(false);
 
   const textRef = useRef();
 
@@ -241,75 +241,89 @@ function App() {
 
   return (
     <body>
-      <div className="pic">
-      
-      </div>
-      
       <form className="fbForm" action="" onSubmit={handleSubmit}>
-          <div className="inputContainer">
+        <div className="inputContainer">
           <label htmlFor="eventz">paste here</label>
           <textarea
-          onChange={handleText}
-          ref={textRef}
-          name="eventz"
-          placeholder="DATE & TIME (add [Format] here)
+            onChange={handleText}
+            ref={textRef}
+            name="eventz"
+            placeholder="DATE & TIME (add [Format] here)
 EVENT NAME
 VENUE"
-          id=""
-          cols="80"
-          rows="3"
-        ></textarea>
-          </div>
-        
-        <button type="submit" className="submit">
-          boom
-        </button>
-      </form>
-      
-      <div className="manualFormWrapper">
-      <button className="submit" onClick={() => setShowForm(!showForm)} >manual entry</button>
-      {showForm && <form
-        onSubmit={handleManualSubmit}
-        onChange={handleManualText}
-        className="manualForm"
-        action=""
-      >
-        <div className="formContainer">
-        <div className="inputContainer">
-        <label htmlFor="date">date</label>
-          <input
-            ref={dateRef}
-            className="input"
-            name="date"
-            type="date"
-            ng-model-options="{timezone: 'utc'}"
-          />
-                    </div>
-
-          <div className="inputContainer">
-            <label htmlFor="venue">venue</label>
-            <input ref={venueRef} name="venue" className="input" type="text" />
-          </div>
-          <div className="inputContainer">
-            <label htmlFor="title">event title</label>
-            <input ref={titleRef} name="title" className="input" type="text" />
-          </div>
-          <div className="inputContainer">
-            <label htmlFor="time">time / format</label>
-            <input ref={timeRef} name="time" className="input" type="text" />
-          </div>
+            id=""
+            cols="80"
+            rows="3"
+          ></textarea>
         </div>
 
         <button type="submit" className="submit">
           boom
         </button>
-      </form>}
+      </form>
+
+      <div className="manualFormWrapper">
+        <button className="submit" onClick={() => setShowForm(!showForm)}>
+          manual entry
+        </button>
+        {showForm && (
+          <form
+            onSubmit={handleManualSubmit}
+            onChange={handleManualText}
+            className="manualForm"
+            action=""
+          >
+            <div className="formContainer">
+              <div className="inputContainer">
+                <label htmlFor="date">date</label>
+                <input
+                  ref={dateRef}
+                  className="input"
+                  name="date"
+                  type="date"
+                  ng-model-options="{timezone: 'utc'}"
+                />
+              </div>
+
+              <div className="inputContainer">
+                <label htmlFor="venue">venue</label>
+                <input
+                  ref={venueRef}
+                  name="venue"
+                  className="input"
+                  type="text"
+                />
+              </div>
+              <div className="inputContainer">
+                <label htmlFor="title">event title</label>
+                <input
+                  ref={titleRef}
+                  name="title"
+                  className="input"
+                  type="text"
+                />
+              </div>
+              <div className="inputContainer">
+                <label htmlFor="time">time / format</label>
+                <input
+                  ref={timeRef}
+                  name="time"
+                  className="input"
+                  type="text"
+                />
+              </div>
+            </div>
+
+            <button type="submit" className="submit">
+              boom
+            </button>
+          </form>
+        )}
       </div>
-      
+
       <button className="submit" onClick={() => removePastDates()}>
         remove past dates
       </button>
-      
 
       {sorted.map((events) => (
         <EventContainer
